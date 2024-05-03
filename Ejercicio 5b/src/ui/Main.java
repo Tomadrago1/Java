@@ -13,7 +13,7 @@ public class Main {
         for (int i = 0; i < 2; i++) {
             System.out.println("Ingrese el tipo de empleado (1 - Administrativo, 2 - Vendedor):");
             int tipoEmpleado = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             System.out.print("Ingrese el dni del empleado: ");
             int dni = Integer.parseInt(scanner.nextLine());
@@ -35,11 +35,11 @@ public class Main {
             } else if (tipoEmpleado == 2) {
                 System.out.println("Ingrese el porcentaje de comisión del empleado:");
                 double porcenComision = scanner.nextDouble();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
 
                 System.out.println("Ingrese el total de ventas del empleado:");
                 int totalVtas = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
                 empleados.add(new Vendedor(dni, nombre, apellido, mail, sueldoBase, porcenComision, totalVtas));
             }
         }
