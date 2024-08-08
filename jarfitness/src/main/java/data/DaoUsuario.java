@@ -166,28 +166,28 @@ public class DaoUsuario {
 	    }
 	}
 
-	 /*public void add(Usuario p) {
+	public void addUsuario(Usuario u) {
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into Usuario(nombre, apellido, tipo_doc, nro_doc, email, password, tel, habilitado) values(?,?,?,?,?,?,?,?)",
+							"insert into Usuario(nombre, apellido, email, nombre_usuario, contraseña, tipo_usu, estado) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
-			stmt.setString(1, p.getNombre());
-			stmt.setString(2, p.getApellido());
-			stmt.setString(3, p.getDocumento().getTipo());
-			stmt.setString(4, p.getDocumento().getNro());
-			stmt.setString(5, p.getEmail());
-			stmt.setString(5, p.getPassword());
-			stmt.setString(6, p.getTel());
-			stmt.setBoolean(7, p.isHabilitado());
+			stmt.setString(1, u.getNombre());
+			stmt.setString(2, u.getApellido());
+			stmt.setString(3, u.getEmail());
+			stmt.setString(4, u.getNombreUsuario());
+			stmt.setString(5, u.getPassword());
+			stmt.setInt(6, u.getTipoUsu());
+			stmt.setBoolean(7, u.getEstado());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();
             if(keyResultSet!=null && keyResultSet.next()){
-                p.setId(keyResultSet.getInt(1));
+                u.setIdUsuario(keyResultSet.getInt(1));
+                ;
             }
 		
 		}  catch (SQLException e) {
@@ -200,5 +200,6 @@ public class DaoUsuario {
             } catch (SQLException e) {
             	e.printStackTrace();
             }
-		}*/
+		}
+	}
 }
