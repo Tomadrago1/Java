@@ -44,16 +44,19 @@ public class signin extends HttpServlet {
 		
 		String user= request.getParameter("usuario");
 		String password= request.getParameter("password");
-		
 		usu.setNombreUsuario(user);
 		usu.setPassword(password);
 		usu=ctrl.validate(usu);
-		LinkedList<Usuario> usuarios = ctrl.getAll();
-		
-		
-		request.getSession().setAttribute("usuario", usu);
-		request.setAttribute("listaUsuarios", usuarios);
-		
-		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);}
-}
-
+	    if (usu == null || usu.getEstado()==false) {
+	        // Caso donde la validación devuelve null
+	        request.setAttribute("errorMessage", "El usuario no existe o las credenciales son incorrectas.");
+	        request.getRequestDispatcher("WEB-INF/errorLogin.jsp").forward(request, response);
+	    } else {
+	        // Validación exitosa
+	        LinkedList<Usuario> usuarios = ctrl.getAll();
+	        request.getSession().setAttribute("usuario", usu);
+	        request.setAttribute("listaUsuarios", usuarios);
+	        request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+	    }
+		}
+	}

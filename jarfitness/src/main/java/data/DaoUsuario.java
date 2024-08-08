@@ -53,7 +53,7 @@ public class DaoUsuario {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id_usuario,nombre,apellido,email,nombre_usuario,tipo_usu from Usuario where nombre_usuario=? and contraseña=?"
+					"select id_usuario,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where nombre_usuario=? and contraseña=?"
 					);
 			stmt.setString(1, usu.getNombreUsuario());
 			stmt.setString(2, usu.getPassword());
@@ -66,6 +66,7 @@ public class DaoUsuario {
 				u.setEmail(rs.getString("email"));
 				u.setNombreUsuario(rs.getString("nombre_usuario"));
 				u.setTipoUsu(rs.getInt("tipo_usu"));
+				u.setEstado(rs.getBoolean("estado"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,7 +89,7 @@ public class DaoUsuario {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id_usuario,nombre,apellido,email,nombre_usuario,tipo_usu from Usuario where id_usuario=?"
+					"select id_usuario,nombre,apellido,email,nombre_usuario,tipo_usu,estado from Usuario where id_usuario=?"
 					);
 			stmt.setInt(1, id);
 			rs=stmt.executeQuery();
@@ -100,6 +101,7 @@ public class DaoUsuario {
 				u.setEmail(rs.getString("email"));
 				u.setNombreUsuario(rs.getString("nombre_usuario"));
 				u.setTipoUsu(rs.getInt("tipo_usu"));
+				u.setEstado(rs.getBoolean("estado"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,8 +131,7 @@ public class DaoUsuario {
 	        stmt.setInt(5, tipoUsu);
 	        stmt.setInt(6, id);
 
-	        // Execute the update
-	        int filasActualizadas = stmt.executeUpdate(); // Cambiar a executeUpdate
+	        int filasActualizadas = stmt.executeUpdate(); 
 	        return filasActualizadas > 0; // Retornar true si se actualizó al menos una fila
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -188,11 +189,7 @@ public class DaoUsuario {
             if(keyResultSet!=null && keyResultSet.next()){
                 p.setId(keyResultSet.getInt(1));
             }
-            
-            DataRol dr = new DataRol();
-            dr.setRolesDeUsuario(p);
-
-			
+		
 		}  catch (SQLException e) {
             e.printStackTrace();
 		} finally {
