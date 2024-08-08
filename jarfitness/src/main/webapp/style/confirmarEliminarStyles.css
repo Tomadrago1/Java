@@ -1,0 +1,39 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #e74c3c; /* Color rojo para el título */
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="submit"] {
+            background-color: #3498db; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            padding: 10px 20px; /* Espaciado */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cambiar cursor al pasar por encima */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9; /* Color de fondo al pasar el cursor */
+        }
+        .cancelar {
+            background-color: #e74c3c; /* Color de fondo para cancelar */
+        }
+        .cancelar:hover {
+            background-color: #c0392b; /* Color de fondo al pasar el cursor para cancelar */
+        }

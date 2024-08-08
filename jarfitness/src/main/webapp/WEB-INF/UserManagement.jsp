@@ -30,22 +30,31 @@
 						<th>Apellido</th>
 						<th>Email</th>
 						<th>Nombre de Usuario</th>         
-						<th>Acción</th>
-						<th>Acción</th>
+						<th>Editar usuario</th>
+						<th>Baja usuario</th>
 					</tr>
 				</thead>
 				<tbody>
-				<% for (Usuario usu : lu) { %>
-					<tr>
-						<td><%=usu.getIdUsuario()%></td>
-						<td><%=usu.getNombre()%></td>
-						<td><%=usu.getApellido()%></td>
-						<td><%=usu.getEmail()%></td>
-						<td><%=usu.getNombreUsuario()%></td> 
-						<td><a href="editarUsuario?<%=usu%>" class="action-btn edit-btn">Editar</a></td>
-						<td><a href="eliminarUsuario?id=<%=usu.getIdUsuario()%>" class="action-btn delete-btn">Borrar</a></td>
-					</tr>
-				<% } %>
+					<% for (Usuario usu : lu) { 
+				    if (usu.getEstado()) { // Muestra solo si el estado es true (o 1)
+					%>
+				    <tr>
+				        <td><%=usu.getIdUsuario()%></td>
+				        <td><%=usu.getNombre()%></td>
+				        <td><%=usu.getApellido()%></td>
+				        <td><%=usu.getEmail()%></td>
+				        <td><%=usu.getNombreUsuario()%></td>  
+				        <td><a href="editarUsuario?id=<%=usu.getIdUsuario()%>" class="action-btn edit-btn">Editar</a></td>
+				       <td>
+						    <form action="EliminarUsuario" method="post" style="display:inline;">
+						        <input type="hidden" name="id" value="<%=usu.getIdUsuario()%>">
+						        <input type="submit" value="Borrar" class="action-btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+						    </form>
+						</td>
+				    </tr>
+					<% 
+				    } // Fin de la condición
+					} %>
 				</tbody>
 			</table>
 		</div>

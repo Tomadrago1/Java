@@ -3,26 +3,28 @@ package servlet;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import data.DaoUsuario;
 import entities.Usuario;
 import logic.Login;
 
 /**
- * Servlet implementation class signin
+ * Servlet implementation class EliminarUsuario
  */
-@WebServlet({ "/signin", "/Signin", "/SignIn", "/signIn", "/SIGNIN" })
-public class signin extends HttpServlet {
+@WebServlet("/EliminarUsuario")
+public class EliminarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public signin() {
+    public EliminarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +41,20 @@ public class signin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usu = new Usuario();
-		Login ctrl = new Login();
-		
-		String user= request.getParameter("usuario");
-		String password= request.getParameter("password");
-		
-		usu.setNombreUsuario(user);
-		usu.setPassword(password);
-		usu=ctrl.validate(usu);
-		LinkedList<Usuario> usuarios = ctrl.getAll();
-		
-		
-		request.getSession().setAttribute("usuario", usu);
-		request.setAttribute("listaUsuarios", usuarios);
-		
-		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);}
-}
+		    int id = Integer.parseInt(request.getParameter("id"));
+		    DaoUsuario daoUsuario = new DaoUsuario();
 
+		    boolean success = daoUsuario.eliminarUsuario(id); // Llama al método para eliminar el usuario
+
+		    if (success) {
+		    	Login ctrl = new Login();
+	        	LinkedList<Usuario> usuarios = ctrl.getAll();
+	        	request.setAttribute("listaUsuarios", usuarios);
+	        	request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+		    } else {
+		        response.getWriter().append("Error al eliminar el usuario."); // Mensaje de error
+		    }
+		
+	}
+
+}

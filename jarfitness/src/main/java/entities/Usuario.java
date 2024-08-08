@@ -8,27 +8,8 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
     private int tipoUsu;
+    private boolean estado;
 
-    /* // Constructor sin idUsuario (para inserciones)
-    public Usuario(String nombre, String apellido, String email, String nombreUsuario, String password) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-    }
-
-    // Constructor con idUsuario (para selecciones)
-    public Usuario(int idUsuario, String nombre, String apellido, String email, String nombreUsuario, String password) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-    }*/
-
-    // Getters y setters
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -36,6 +17,14 @@ public class Usuario {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }    
 
     public String getNombre() {
         return nombre;
@@ -93,7 +82,8 @@ public class Usuario {
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
-                ", contraseña='" + password + '\'' +
+                ", tipoUsu=" + tipoUsu +
+                ", estado=" + estado +
                 '}';
     }
 }
