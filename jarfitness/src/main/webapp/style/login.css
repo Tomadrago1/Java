@@ -69,10 +69,10 @@ body {
     -webkit-border-radius: 3px 3px 3px 3px;
 }
 
-#login input::placeholder {
+/*#login input::placeholder {
     font-family: 'Overpass', sans-serif;
     color: #E4E4E4;
-}
+}*/
 
 #login button {
     font-family: 'Overpass', sans-serif;

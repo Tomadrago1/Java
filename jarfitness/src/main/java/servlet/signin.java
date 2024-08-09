@@ -52,11 +52,27 @@ public class signin extends HttpServlet {
 	        request.setAttribute("errorMessage", "El usuario no existe o las credenciales son incorrectas.");
 	        request.getRequestDispatcher("WEB-INF/errorLogin.jsp").forward(request, response);
 	    } else {
-	        // Validación exitosa
-	        LinkedList<Usuario> usuarios = ctrl.getAll();
-	        request.getSession().setAttribute("usuario", usu);
-	        request.setAttribute("listaUsuarios", usuarios);
-	        request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+			            switch (usu.getTipoUsu()) {
+			            case 1:
+			            	// Validación exitosa  	      
+			    	        request.getSession().setAttribute("usuario", usu);
+			    	        request.getRequestDispatcher("WEB-INF/vistaAdmin.jsp").forward(request, response);// Página para Cliente
+			                break;
+			            case 2:
+			                response.sendRedirect("professionalDashboard.jsp"); // Página para Profesional
+			                break;
+			            case 3:
+			            	 request.getSession().setAttribute("usuario", usu);
+			            	 request.getRequestDispatcher("WEB-INF/vistaUsuario.jsp").forward(request, response);// Página para Cliente
+			                break;
+			            default:
+			                response.getWriter().append("Tipo de usuario no válido.");
+			                break;
+			        }
+			    } 
+		
+			}
+	       
 	    }
-		}
-	}
+
+	

@@ -31,8 +31,6 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         if (success) {
         	Login ctrl = new Login();
         	LinkedList<Usuario> usuarios = ctrl.getAll();
-        	/*Usuario usuario = daoUsuario.getUserById(id);
-        	request.getSession().setAttribute("usuario", usuario);*/
     		request.setAttribute("listaUsuarios", usuarios);
         	request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
         } else {
